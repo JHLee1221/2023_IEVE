@@ -114,11 +114,9 @@ while capture.isOpened():
 
     # 차선 중심선과 중심선 각도 구하기 방법 1
     vector1 = (np.array([center_x2 - center_x1, center_y2 - center_y1]))
-    vector2 = (np.array([0, 479]))
-    vector3 = (np.array([479, 0]))
-    vector = vector2 + vector3
+    vector2 = (np.array([1, 1]))
 
-    radian = np.arccos(np.dot(vector1, vector)/(np.linalg.norm(vector1)*np.linalg.norm(vector)))
+    radian = np.arccos(np.dot(vector1, vector2)/(np.linalg.norm(vector1)*np.linalg.norm(vector2)))
     theta = radian * 180/np.pi
 
     theta = 2 * (90 - np.fmin(theta, 180.0-theta))
