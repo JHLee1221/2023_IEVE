@@ -115,32 +115,13 @@ while capture.isOpened():
     # 차선 중심선과 중심선 각도 구하기 방법 1
     vector1 = (np.array([center_x2 - center_x1, center_y2 - center_y1]))
     vector2 = (np.array([0, 479]))
-    vector3 = (np.array([639, 0]))
+    vector3 = (np.array([479, 0]))
     vector = vector2 + vector3
 
     radian = np.arccos(np.dot(vector1, vector)/(np.linalg.norm(vector1)*np.linalg.norm(vector)))
     theta = radian * 180/np.pi
 
     theta = 2 * (90 - np.fmin(theta, 180.0-theta))
-
-    # # 각도 구하기 방법2
-    # slope1 = (center_y2 - center_y1) / (center_x2 - center_x1)
-    # y_intercept1 = center_y1 - slope1 * center_x1
-    # # 두 번째 직선의 기울기와 y절편
-    # slope2 = 0
-    # y_intercept2 = 0
-    # # 두 직선의 교점을 구합니다.
-    # x = (y_intercept2 - y_intercept1) / (slope1 - slope2)
-    # y = slope1 * x + y_intercept1
-    # intersection = (x, y)
-    # # 두 직선의 기울기를 구합니다.
-    # theta1 = np.arctan2(center_y2 - center_y1, center_x2 - center_x1)
-    # theta2 = 0
-    # # 두 직선이 이루는 각도를 계산합니다.
-    # theta = np.abs(np.rad2deg(theta1 - theta2))
-    # # 만약 각도가 180도를 넘어서면, 보정을 해줍니다.
-    # if theta > 180.0:
-    #     theta = 180 - theta
 
     print(theta)
 
