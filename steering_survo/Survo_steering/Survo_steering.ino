@@ -18,11 +18,13 @@ void loop() {
   {
      
   }
-  angle = Serial.parseInt();
+  angle = Serial.read();
   while (Serial.available() == 0)
   {
      
   }
+  
+  
   Serial.println("angle");
   Serial.println(angle);
 
