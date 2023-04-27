@@ -4,10 +4,12 @@ import rospy
 import cv2
 import numpy as np
 import os, rospkg
+import time
 
 from geometry_msgs.msg import Twist
 from sensor_msgs.msg import CompressedImage, LaserScan
 from cv_bridge import CvBridgeError
+bridge = CvBridgeError()
 
 class LaneFollower:
 
@@ -20,8 +22,6 @@ class LaneFollower:
         self.min_distance = float("inf")
 
     def laser_callback(self, msg):
-        angle_min = msg.angle_min
-        angle_max = msg.angle_max
         angle_increment = msg.angle_increment
         num_readings = len(msg.ranges)
 
@@ -40,7 +40,18 @@ class LaneFollower:
         else:
              self.min_distance = float('inf')
 
-        print("Minimum distance: ", self.min_distance)
+        print("Minimum distance: ", round(self.min_distance, 1))
+
+        if round(self.min_distance, 1) == 1.4:
+            self.obastacle()
+            time.sleep(3.5)
+            self.obastacle1()
+            #break
+        
+        if round(self.min_distance, 1) < 1.4:
+            self.obastacle2()
+
+            #break
         
     def callback(self, msg):
         try:
@@ -50,6 +61,28 @@ class LaneFollower:
             print(e)
 
         img_hsv = cv2.cvtColor(self.img_bgr, cv2.COLOR_BGR2HSV)
+
+#----------------------------bev--------------------------------------#
+        p1 = [0, 0] # 좌하
+        p2 = [640, 0] # 우하
+        p3 = [640, 480] # 우상
+        p4 = [0, 480] # 좌상
+
+        # corners_point_arr는 변환 이전 이미지 좌표 4개 
+        corner_points_arr = np.float32([p1, p2, p3, p4])
+        height, width = img_hsv.shape[:2]
+
+        image_p1 = [0, 0]
+        image_p2 = [width, 0]
+        image_p3 = [width, height]
+        image_p4 = [0, height]
+
+        image_params = np.float32([image_p1, image_p2, image_p3, image_p4])
+
+        mat = cv2.getPerspectiveTransform(corner_points_arr, image_params)
+        # mat = 변환행렬(3*3 행렬) 반
+        self.img_bgr = cv2.warpPerspective(img_hsv, mat, (width, height))
+#----------------------------bev--------------------------------------#
 
         lower_wlane = np.array([0,0,185])
         upper_wlane = np.array([30,60,255])
