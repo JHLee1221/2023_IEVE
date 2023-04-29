@@ -1,0 +1,2 @@
+vuasrl_cam:vuasrl_cam123:vuasrl_motor:vuasrl_msgs:vuasrl_ultrasonic
+-DCATKIN_DEVEL_PREFIX=/home/gihong/catkin_ws/devel -DCMAKE_INSTALL_PREFIX=/home/gihong/catkin_ws/install -G Unix Makefiles

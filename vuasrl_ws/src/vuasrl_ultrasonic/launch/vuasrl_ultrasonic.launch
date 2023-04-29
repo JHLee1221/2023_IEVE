@@ -1,0 +1,5 @@
+<launch>
+
+  <node pkg="vuasrl_ultrasonic" type="vuasrl_ultrasonic.py" name="vuasrl_ultrasonic" output="screen" />
+
+</launch>

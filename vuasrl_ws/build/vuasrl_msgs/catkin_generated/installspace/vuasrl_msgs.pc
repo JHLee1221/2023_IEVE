@@ -1,0 +1,8 @@
+prefix=/home/gihong/catkin_ws/install
+
+Name: vuasrl_msgs
+Description: Description of vuasrl_msgs
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
