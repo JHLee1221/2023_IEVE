@@ -3,21 +3,22 @@
 import rospy
 import cv2
 import numpy as np
-import os, rospkg
 import time
 
 from geometry_msgs.msg import Twist
-from sensor_msgs.msg import CompressedImage, LaserScan
-from cv_bridge import CvBridgeError
-bridge = CvBridgeError()
+from sensor_msgs.msg import Image, LaserScan
+from cv_bridge import CvBridge
+
+bridge = CvBridge()
+cv_image = np.empty(shape=[0])
 
 class LaneFollower:
 
     def __init__(self):
 
-        self.image_sub = rospy.Subscriber("/smart_tugcar/camera/rgb/image_raw/compressed", CompressedImage, self.callback)
-        self.laser_sub = rospy.Subscriber("/smart_tugcar/tugcar/laser/scan", LaserScan, self.laser_callback)
-        self.cmd_vel_pub = rospy.Publisher('/smart_tugcar/cmd_vel', Twist, queue_size=10)
+        self.image_sub = rospy.Subscriber("/image_raw", Image, self.callback)
+        self.laser_sub = rospy.Subscriber("/scan", LaserScan, self.laser_callback)
+        self.cmd_vel_pub = rospy.Publisher('/vuasrl_car /cmd_vel', Twist, queue_size=10)
         self.img_bgr = None
         self.min_distance = float("inf")
 
@@ -40,8 +41,8 @@ class LaneFollower:
         else:
              self.min_distance = float('inf')
 
-        print("Minimum distance: ", round(self.min_distance, 1))
-
+        print("Minimum distance:", round(self.min_distance, 1))
+        
         if round(self.min_distance, 1) == 1.4:
             self.obastacle()
             time.sleep(3.5)
@@ -52,16 +53,15 @@ class LaneFollower:
             self.obastacle2()
 
             #break
+            
         
-    def callback(self, msg):
-        try:
-            np_arr = np.frombuffer(msg.data, np.uint8)
-            self.img_bgr = cv2.imdecode(np_arr, cv2.IMREAD_COLOR)
-        except CvBridgeError as e:
-            print(e)
-
-        img_hsv = cv2.cvtColor(self.img_bgr, cv2.COLOR_BGR2HSV)
-
+    def callback(self, data):
+        
+        global cv_image
+        cv_image = bridge.imgmsg_to_cv2(data, 'bgr8')
+        frame = cv_image
+        img_hsv = cv2.cvtColor(frame, cv2.COLOR_BGR2HSV)
+        
 #----------------------------bev--------------------------------------#
         p1 = [0, 0] # 좌하
         p2 = [640, 0] # 우하
@@ -81,8 +81,8 @@ class LaneFollower:
 
         mat = cv2.getPerspectiveTransform(corner_points_arr, image_params)
         # mat = 변환행렬(3*3 행렬) 반
-        self.img_bgr = cv2.warpPerspective(img_hsv, mat, (width, height))
-#----------------------------bev--------------------------------------#
+        image_transformed = cv2.warpPerspective(img_hsv, mat, (width, height))
+#------------------------------------------------------------------#    
 
         lower_wlane = np.array([0,0,185])
         upper_wlane = np.array([30,60,255])
@@ -112,7 +112,8 @@ class LaneFollower:
             cy = int(M['m01']/M['m00'])
 
             # find edges using Canny edge detection
-            img_gray = cv2.cvtColor(self.img_bgr, cv2.COLOR_BGR2GRAY)
+            img_bgr = cv2.cvtColor(image_transformed, cv2.COLOR_HSV2BGR)
+            img_gray = cv2.cvtColor(img_bgr, cv2.COLOR_BGR2GRAY)
             img_edges = cv2.Canny(img_gray, 100, 200)
             
             left_edge = np.argmax(img_edges[cy,:cx])
@@ -122,29 +123,47 @@ class LaneFollower:
             midpoint = (left_edge + right_edge) // 2
             
             # draw left and right edges
-            cv2.line(self.img_bgr, (left_edge, cy), (cx, cy), (0, 255, 0), 2)
-            cv2.line(self.img_bgr, (cx, cy), (right_edge, cy), (0, 255, 0), 2)
+            cv2.line(image_transformed, (left_edge, cy), (cx, cy), (0, 255, 0), 2)
+            cv2.line(image_transformed, (cx, cy), (right_edge, cy), (0, 255, 0), 4)
             
             # draw the midpoint as a vertical line
-            cv2.line(self.img_bgr, (midpoint, 0), (midpoint, self.img_bgr.shape[0]), (0, 0, 255), 2)
+            cv2.line(image_transformed, (midpoint, 0), (midpoint, image_transformed.shape[0]), (0, 0, 255), 2)
 
             # move the robot based on the position of the center of the lane and check for obstacles
-            error = cx - self.img_bgr.shape[1]/2
+            error = ((cx + 210) - image_transformed.shape[1]/2) + 1
             twist = Twist()
-
-            if self.min_distance < 0.0: # Change this value according to the desired stopping distance
-                twist.linear.x = 0.0
-            else:
-                twist.linear.x = 0.2
-
-            twist.angular.z = -float(error) / 100
-            self.cmd_vel_pub.publish(twist)
-         
-
+            ##
+            twist.linear.x = 5.0
+            
+            twist.angular.z = -float(error) / 400
+            self.cmd_vel_pub.publish(twist)    
+        #image_transformed_bgr = cv2.cvtColor(image_transformed, cv2.COLOR_BGR2GRAY)
         # display the image
-        cv2.imshow("Lane Detection", self.img_bgr)
+        cv2.imshow("Lane Detection", image_transformed)
+        #cv2.imshow("Lane Detection", frame)
         cv2.waitKey(1) 
-
+    
+    def obastacle(self):
+        msg = Twist()
+        msg.angular.z = 3.0
+        msg.linear.x = 4.0
+        self.cmd_vel_pub.publish(msg)
+        #print("obstacle_mode") 
+    
+    def obastacle1(self):
+        msg = Twist()
+        msg.angular.z = -3.0
+        msg.linear.x = 5.0
+        self.cmd_vel_pub.publish(msg)
+        print("obstacle_mode") 
+        
+    def obastacle2(self):
+        msg = Twist()
+        msg.angular.z = 0.0
+        msg.linear.x = 0.0
+        self.cmd_vel_pub.publish(msg)
+        print("obstacle_mode") 
+          
 if __name__ == '__main__':
 
     rospy.init_node('lane_follower', anonymous=True)
