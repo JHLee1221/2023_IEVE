@@ -1,4 +1,4 @@
-prefix=/home/gihong/catkin_ws/install
+prefix=/home/kimjaen/2023_IEVE/vuasrl_ws/install
 
 Name: vuasrl_motor
 Description: Description of vuasrl_motor

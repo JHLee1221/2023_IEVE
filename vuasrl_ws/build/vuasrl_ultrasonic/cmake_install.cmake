@@ -1,8 +1,8 @@
-# Install script for directory: /home/gihong/catkin_ws/src/vuasrl_ultrasonic
+# Install script for directory: /home/kimjaen/2023_IEVE/vuasrl_ws/src/vuasrl_ultrasonic
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/gihong/catkin_ws/install")
+  set(CMAKE_INSTALL_PREFIX "/home/kimjaen/2023_IEVE/vuasrl_ws/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -38,17 +38,17 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/gihong/catkin_ws/build/vuasrl_ultrasonic/catkin_generated/installspace/vuasrl_ultrasonic.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/kimjaen/2023_IEVE/vuasrl_ws/build/vuasrl_ultrasonic/catkin_generated/installspace/vuasrl_ultrasonic.pc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/vuasrl_ultrasonic/cmake" TYPE FILE FILES
-    "/home/gihong/catkin_ws/build/vuasrl_ultrasonic/catkin_generated/installspace/vuasrl_ultrasonicConfig.cmake"
-    "/home/gihong/catkin_ws/build/vuasrl_ultrasonic/catkin_generated/installspace/vuasrl_ultrasonicConfig-version.cmake"
+    "/home/kimjaen/2023_IEVE/vuasrl_ws/build/vuasrl_ultrasonic/catkin_generated/installspace/vuasrl_ultrasonicConfig.cmake"
+    "/home/kimjaen/2023_IEVE/vuasrl_ws/build/vuasrl_ultrasonic/catkin_generated/installspace/vuasrl_ultrasonicConfig-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/vuasrl_ultrasonic" TYPE FILE FILES "/home/gihong/catkin_ws/src/vuasrl_ultrasonic/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/vuasrl_ultrasonic" TYPE FILE FILES "/home/kimjaen/2023_IEVE/vuasrl_ws/src/vuasrl_ultrasonic/package.xml")
 endif()
 

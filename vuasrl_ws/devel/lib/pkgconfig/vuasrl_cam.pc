@@ -1,4 +1,4 @@
-prefix=/home/gihong/catkin_ws/devel
+prefix=/home/kimjaen/2023_IEVE/vuasrl_ws/devel
 
 Name: vuasrl_cam
 Description: Description of vuasrl_cam

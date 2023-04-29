@@ -1,8 +1,8 @@
-# Install script for directory: /home/gihong/catkin_ws/src/vuasrl_cam
+# Install script for directory: /home/kimjaen/2023_IEVE/vuasrl_ws/src/vuasrl_cam
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/gihong/catkin_ws/install")
+  set(CMAKE_INSTALL_PREFIX "/home/kimjaen/2023_IEVE/vuasrl_ws/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -38,17 +38,17 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/gihong/catkin_ws/build/vuasrl_cam/catkin_generated/installspace/vuasrl_cam.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/kimjaen/2023_IEVE/vuasrl_ws/build/vuasrl_cam/catkin_generated/installspace/vuasrl_cam.pc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/vuasrl_cam/cmake" TYPE FILE FILES
-    "/home/gihong/catkin_ws/build/vuasrl_cam/catkin_generated/installspace/vuasrl_camConfig.cmake"
-    "/home/gihong/catkin_ws/build/vuasrl_cam/catkin_generated/installspace/vuasrl_camConfig-version.cmake"
+    "/home/kimjaen/2023_IEVE/vuasrl_ws/build/vuasrl_cam/catkin_generated/installspace/vuasrl_camConfig.cmake"
+    "/home/kimjaen/2023_IEVE/vuasrl_ws/build/vuasrl_cam/catkin_generated/installspace/vuasrl_camConfig-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/vuasrl_cam" TYPE FILE FILES "/home/gihong/catkin_ws/src/vuasrl_cam/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/vuasrl_cam" TYPE FILE FILES "/home/kimjaen/2023_IEVE/vuasrl_ws/src/vuasrl_cam/package.xml")
 endif()
 

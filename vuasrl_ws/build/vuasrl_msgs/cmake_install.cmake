@@ -1,8 +1,8 @@
-# Install script for directory: /home/gihong/catkin_ws/src/vuasrl_msgs
+# Install script for directory: /home/kimjaen/2023_IEVE/vuasrl_ws/src/vuasrl_msgs
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/gihong/catkin_ws/install")
+  set(CMAKE_INSTALL_PREFIX "/home/kimjaen/2023_IEVE/vuasrl_ws/install")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -38,17 +38,17 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/gihong/catkin_ws/build/vuasrl_msgs/catkin_generated/installspace/vuasrl_msgs.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/kimjaen/2023_IEVE/vuasrl_ws/build/vuasrl_msgs/catkin_generated/installspace/vuasrl_msgs.pc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/vuasrl_msgs/cmake" TYPE FILE FILES
-    "/home/gihong/catkin_ws/build/vuasrl_msgs/catkin_generated/installspace/vuasrl_msgsConfig.cmake"
-    "/home/gihong/catkin_ws/build/vuasrl_msgs/catkin_generated/installspace/vuasrl_msgsConfig-version.cmake"
+    "/home/kimjaen/2023_IEVE/vuasrl_ws/build/vuasrl_msgs/catkin_generated/installspace/vuasrl_msgsConfig.cmake"
+    "/home/kimjaen/2023_IEVE/vuasrl_ws/build/vuasrl_msgs/catkin_generated/installspace/vuasrl_msgsConfig-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/vuasrl_msgs" TYPE FILE FILES "/home/gihong/catkin_ws/src/vuasrl_msgs/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/vuasrl_msgs" TYPE FILE FILES "/home/kimjaen/2023_IEVE/vuasrl_ws/src/vuasrl_msgs/package.xml")
 endif()
 
