@@ -121,11 +121,17 @@ class LaneFollower:
         lower_ylane = np.array([10,100,100])
         upper_ylane = np.array([40,255,255])
 
+        # add code required to extract the orange color
+        # lower_olane = np.array([5, 100, 100])
+        # upper_olane = np.array([15, 255, 255])
+
         img_wlane = cv2.inRange(img_hsv, lower_wlane, upper_wlane)
         img_ylane = cv2.inRange(img_hsv, lower_ylane, upper_ylane)
+        # img_olane = cv2.inRange(img_hsv, lower_olane, upper_olane)
 
         # combine the two binary images
         img_lane = cv2.bitwise_or(img_wlane, img_ylane)
+        # img_lane = cv2.bitwise_or(img_wlane, img_olane)
 
         # apply morphological operations to reduce noise
         kernel = np.ones((5,5), np.uint8)
