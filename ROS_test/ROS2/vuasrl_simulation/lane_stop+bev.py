@@ -130,6 +130,8 @@ class LaneFollower(Node):
 
             # move the robot based on the position of the center of the lane and check for obstacles
             error = ((cx + 210) - image_transformed.shape[1]/2) + 1
+            error = error * 180/np.pi
+            error = 2 * (90 - np.fmin(error, 180- error))
             twist = Twist()
             ##
             twist.linear.x = 5.0
