@@ -36,23 +36,30 @@ void ackermannCallback(const ackermann_msgs::AckermannDrive & msg)
     
   int steering_angle = msg.steering_angle * (180 / M_PI) + 90;
 
+  int vel = abs(510*msg.speed);
+
 
   if (steering_angle < MAX_STEERING_ANGLE)
-    analogWrite(5, 200);
-    analogWrite(4, LOW);
+    digitalWrite(Motor_F, HIGH);
+    digitalWrite(Motor_B, LOW);
+    analogWrite(5, vel);
     
 
   if (steering_angle > MIN_STEERING_ANGLE and steering_angle > MAX_STEERING_ANGLE)
-    analogWrite(5, 200);
-    analogWrite(4, LOW);
+    digitalWrite(Motor_F, HIGH);
+    digitalWrite(Motor_B, LOW);
+    analogWrite(5, vel);
 
-  //if (steering_angle > MAX_STEERING_ANGLE)
-  //  analogWrite(5, 100);
-  //  analogWrite(4, LOW);
+  if (steering_angle > MAX_STEERING_ANGLE)
+    digitalWrite(Motor_F, HIGH);
+    digitalWrite(Motor_B, LOW);
+    analogWrite(5, vel);
+
 
   if (steering_angle < MIN_STEERING_ANGLE)
-    analogWrite(5, 100);
-    analogWrite(4, LOW);
+    digitalWrite(Motor_F, HIGH);
+    digitalWrite(Motor_B, LOW);
+    analogWrite(5, vel);
 
   if (steering_angle < MIN_STEERING_ANGLE)
     steering_angle = MIN_STEERING_ANGLE;

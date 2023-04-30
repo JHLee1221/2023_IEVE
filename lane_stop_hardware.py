@@ -170,7 +170,7 @@ class LaneFollower:
             error = ((cx + 210) - image_transformed.shape[1]/2) + 1
             msg = Twist()
             ##
-            msg.linear.x = 50
+            msg.linear.x = 0.5
             
             msg.angular.z = -int(error) / 100
             self.motor_pub.publish(msg)    
