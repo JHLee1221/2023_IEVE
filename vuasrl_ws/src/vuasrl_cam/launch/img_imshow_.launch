@@ -1,0 +1,5 @@
+<launch>
+
+<node name='webcam' pkg="vuasrl_cam" type="img_imshow.py" output="screen" respawn="true"/>
+
+</launch>

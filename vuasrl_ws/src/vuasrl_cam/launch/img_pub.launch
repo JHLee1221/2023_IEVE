@@ -1,0 +1,7 @@
+<launch>
+
+<node name='image' pkg="vuasrl_cam" type="img_publisher.py" output="screen" respawn="true"/>
+
+<node name='image_sub' pkg="vuasrl_cam" type="img_subscriber.py" output="screen" respawn="true"/>
+
+</launch>

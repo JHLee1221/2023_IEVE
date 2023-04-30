@@ -1,0 +1,8 @@
+<launch>
+  <!-- Lane Follower Node -->
+  <node name="auto_driving" pkg="vuasrl_car" type="lane_stop_hardware.py" output="screen">
+  </node>
+  
+  <!-- Add other nodes as needed -->
+  
+</launch>

@@ -1,0 +1,15 @@
+<launch>
+
+  <arg name="motor_type" default="0" />
+  <arg name="angle_offset" default="0" />
+  
+  <group unless="$(arg motor_type)">
+    <include file="$(find vesc_driver)/launch/vesc_drive_vuasrl_motor.launch" />
+  </group>
+  
+  <node pkg="vuasrl_motor" type="vuasrl_motor.py" name="vuasrl_motor" output="screen" >
+    <param name="motor_type" value="$(arg motor_type)" />
+    <param name="angle_offset" value="$(arg angle_offset)" />
+  </node>
+
+</launch>

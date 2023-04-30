@@ -1,0 +1,2 @@
+vuasrl_cam:vuasrl_car:vuasrl_motor:vuasrl_msgs:vuasrl_ultrasonic
+-DCATKIN_WHITELIST_PACKAGES= -DCATKIN_DEVEL_PREFIX=/home/kimjaen/2023_IEVE/vuasrl_ws/devel -DCMAKE_INSTALL_PREFIX=/home/kimjaen/2023_IEVE/vuasrl_ws/install -G Unix Makefiles

@@ -1,0 +1,8 @@
+prefix=/home/gihong/catkin_ws/install
+
+Name: vuasrl_cam123
+Description: Description of vuasrl_cam123
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 
