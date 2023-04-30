@@ -1,21 +1,21 @@
 Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
-Change Dir: /home/gihong/catkin_ws/build/CMakeFiles/CMakeTmp
+Change Dir: /home/gihong/2023_IEVE/vuasrl_ws/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/make cmTC_f6247/fast && /usr/bin/make -f CMakeFiles/cmTC_f6247.dir/build.make CMakeFiles/cmTC_f6247.dir/build
-make[1]: Entering directory '/home/gihong/catkin_ws/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_f6247.dir/src.c.o
-/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_f6247.dir/src.c.o   -c /home/gihong/catkin_ws/build/CMakeFiles/CMakeTmp/src.c
-Linking C executable cmTC_f6247
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f6247.dir/link.txt --verbose=1
-/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD    -rdynamic CMakeFiles/cmTC_f6247.dir/src.c.o  -o cmTC_f6247 
-/usr/bin/ld: CMakeFiles/cmTC_f6247.dir/src.c.o: in function `main':
+Run Build Command(s):/usr/bin/make cmTC_b30b6/fast && /usr/bin/make -f CMakeFiles/cmTC_b30b6.dir/build.make CMakeFiles/cmTC_b30b6.dir/build
+make[1]: Entering directory '/home/gihong/2023_IEVE/vuasrl_ws/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_b30b6.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_b30b6.dir/src.c.o   -c /home/gihong/2023_IEVE/vuasrl_ws/build/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_b30b6
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b30b6.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD    -rdynamic CMakeFiles/cmTC_b30b6.dir/src.c.o  -o cmTC_b30b6 
+/usr/bin/ld: CMakeFiles/cmTC_b30b6.dir/src.c.o: in function `main':
 src.c:(.text+0x46): undefined reference to `pthread_create'
 /usr/bin/ld: src.c:(.text+0x52): undefined reference to `pthread_detach'
 /usr/bin/ld: src.c:(.text+0x63): undefined reference to `pthread_join'
 collect2: error: ld returned 1 exit status
-make[1]: *** [CMakeFiles/cmTC_f6247.dir/build.make:87: cmTC_f6247] Error 1
-make[1]: Leaving directory '/home/gihong/catkin_ws/build/CMakeFiles/CMakeTmp'
-make: *** [Makefile:121: cmTC_f6247/fast] Error 2
+make[1]: *** [CMakeFiles/cmTC_b30b6.dir/build.make:87: cmTC_b30b6] Error 1
+make[1]: Leaving directory '/home/gihong/2023_IEVE/vuasrl_ws/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_b30b6/fast] Error 2
 
 
 Source file was:
@@ -39,41 +39,43 @@ int main(void)
 }
 
 Determining if the function pthread_create exists in the pthreads failed with the following output:
-Change Dir: /home/gihong/catkin_ws/build/CMakeFiles/CMakeTmp
+Change Dir: /home/gihong/2023_IEVE/vuasrl_ws/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/make cmTC_eb61f/fast && /usr/bin/make -f CMakeFiles/cmTC_eb61f.dir/build.make CMakeFiles/cmTC_eb61f.dir/build
-make[1]: Entering directory '/home/gihong/catkin_ws/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_eb61f.dir/CheckFunctionExists.c.o
-/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_eb61f.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
-Linking C executable cmTC_eb61f
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_eb61f.dir/link.txt --verbose=1
-/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_eb61f.dir/CheckFunctionExists.c.o  -o cmTC_eb61f  -lpthreads 
+Run Build Command(s):/usr/bin/make cmTC_e3fab/fast && /usr/bin/make -f CMakeFiles/cmTC_e3fab.dir/build.make CMakeFiles/cmTC_e3fab.dir/build
+make[1]: Entering directory '/home/gihong/2023_IEVE/vuasrl_ws/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_e3fab.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_e3fab.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_e3fab
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_e3fab.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_e3fab.dir/CheckFunctionExists.c.o  -o cmTC_e3fab  -lpthreads 
 /usr/bin/ld: cannot find -lpthreads
 collect2: error: ld returned 1 exit status
-make[1]: *** [CMakeFiles/cmTC_eb61f.dir/build.make:87: cmTC_eb61f] Error 1
-make[1]: Leaving directory '/home/gihong/catkin_ws/build/CMakeFiles/CMakeTmp'
-make: *** [Makefile:121: cmTC_eb61f/fast] Error 2
+make[1]: *** [CMakeFiles/cmTC_e3fab.dir/build.make:87: cmTC_e3fab] Error 1
+make[1]: Leaving directory '/home/gihong/2023_IEVE/vuasrl_ws/build/CMakeFiles/CMakeTmp'
+make: *** [Makefile:121: cmTC_e3fab/fast] Error 2
 
 
 
 Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
-Change Dir: /home/kimjaen/2023_IEVE/vuasrl_ws/build/CMakeFiles/CMakeTmp
+Change Dir: /home/gihong/2023_IEVE/vuasrl_ws/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/make cmTC_626ad/fast && /usr/bin/make -f CMakeFiles/cmTC_626ad.dir/build.make CMakeFiles/cmTC_626ad.dir/build
-make[1]: Entering directory '/home/kimjaen/2023_IEVE/vuasrl_ws/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_626ad.dir/src.c.o
-/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_626ad.dir/src.c.o   -c /home/kimjaen/2023_IEVE/vuasrl_ws/build/CMakeFiles/CMakeTmp/src.c
-Linking C executable cmTC_626ad
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_626ad.dir/link.txt --verbose=1
-/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD    -rdynamic CMakeFiles/cmTC_626ad.dir/src.c.o  -o cmTC_626ad 
-/usr/bin/ld: CMakeFiles/cmTC_626ad.dir/src.c.o: in function `main':
+Run Build Command(s):/usr/bin/make cmTC_28440/fast && make[1]: Entering directory '/home/gihong/2023_IEVE/vuasrl_ws/build/CMakeFiles/CMakeTmp'
+/usr/bin/make -f CMakeFiles/cmTC_28440.dir/build.make CMakeFiles/cmTC_28440.dir/build
+make[2]: Entering directory '/home/gihong/2023_IEVE/vuasrl_ws/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_28440.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_28440.dir/src.c.o   -c /home/gihong/2023_IEVE/vuasrl_ws/build/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_28440
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_28440.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD    -rdynamic CMakeFiles/cmTC_28440.dir/src.c.o  -o cmTC_28440 
+/usr/bin/ld: CMakeFiles/cmTC_28440.dir/src.c.o: in function `main':
 src.c:(.text+0x46): undefined reference to `pthread_create'
 /usr/bin/ld: src.c:(.text+0x52): undefined reference to `pthread_detach'
 /usr/bin/ld: src.c:(.text+0x63): undefined reference to `pthread_join'
 collect2: error: ld returned 1 exit status
-make[1]: *** [CMakeFiles/cmTC_626ad.dir/build.make:87: cmTC_626ad] Error 1
-make[1]: Leaving directory '/home/kimjaen/2023_IEVE/vuasrl_ws/build/CMakeFiles/CMakeTmp'
-make: *** [Makefile:121: cmTC_626ad/fast] Error 2
+make[2]: *** [CMakeFiles/cmTC_28440.dir/build.make:87: cmTC_28440] Error 1
+make[2]: Leaving directory '/home/gihong/2023_IEVE/vuasrl_ws/build/CMakeFiles/CMakeTmp'
+make[1]: *** [Makefile:121: cmTC_28440/fast] Error 2
+make[1]: Leaving directory '/home/gihong/2023_IEVE/vuasrl_ws/build/CMakeFiles/CMakeTmp'
 
 
 Source file was:
@@ -97,20 +99,84 @@ int main(void)
 }
 
 Determining if the function pthread_create exists in the pthreads failed with the following output:
-Change Dir: /home/kimjaen/2023_IEVE/vuasrl_ws/build/CMakeFiles/CMakeTmp
+Change Dir: /home/gihong/2023_IEVE/vuasrl_ws/build/CMakeFiles/CMakeTmp
 
-Run Build Command(s):/usr/bin/make cmTC_b6de6/fast && /usr/bin/make -f CMakeFiles/cmTC_b6de6.dir/build.make CMakeFiles/cmTC_b6de6.dir/build
-make[1]: Entering directory '/home/kimjaen/2023_IEVE/vuasrl_ws/build/CMakeFiles/CMakeTmp'
-Building C object CMakeFiles/cmTC_b6de6.dir/CheckFunctionExists.c.o
-/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_b6de6.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
-Linking C executable cmTC_b6de6
-/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_b6de6.dir/link.txt --verbose=1
-/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_b6de6.dir/CheckFunctionExists.c.o  -o cmTC_b6de6  -lpthreads 
+Run Build Command(s):/usr/bin/make cmTC_f13f7/fast && make[1]: Entering directory '/home/gihong/2023_IEVE/vuasrl_ws/build/CMakeFiles/CMakeTmp'
+/usr/bin/make -f CMakeFiles/cmTC_f13f7.dir/build.make CMakeFiles/cmTC_f13f7.dir/build
+make[2]: Entering directory '/home/gihong/2023_IEVE/vuasrl_ws/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_f13f7.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_f13f7.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_f13f7
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_f13f7.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_f13f7.dir/CheckFunctionExists.c.o  -o cmTC_f13f7  -lpthreads 
 /usr/bin/ld: cannot find -lpthreads
 collect2: error: ld returned 1 exit status
-make[1]: *** [CMakeFiles/cmTC_b6de6.dir/build.make:87: cmTC_b6de6] Error 1
-make[1]: Leaving directory '/home/kimjaen/2023_IEVE/vuasrl_ws/build/CMakeFiles/CMakeTmp'
-make: *** [Makefile:121: cmTC_b6de6/fast] Error 2
+make[2]: *** [CMakeFiles/cmTC_f13f7.dir/build.make:87: cmTC_f13f7] Error 1
+make[2]: Leaving directory '/home/gihong/2023_IEVE/vuasrl_ws/build/CMakeFiles/CMakeTmp'
+make[1]: *** [Makefile:121: cmTC_f13f7/fast] Error 2
+make[1]: Leaving directory '/home/gihong/2023_IEVE/vuasrl_ws/build/CMakeFiles/CMakeTmp'
+
+
+
+Performing C SOURCE FILE Test CMAKE_HAVE_LIBC_PTHREAD failed with the following output:
+Change Dir: /home/gihong/2023_IEVE/vuasrl_ws/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_880d8/fast && make[1]: Entering directory '/home/gihong/2023_IEVE/vuasrl_ws/build/CMakeFiles/CMakeTmp'
+/usr/bin/make -f CMakeFiles/cmTC_880d8.dir/build.make CMakeFiles/cmTC_880d8.dir/build
+make[2]: Entering directory '/home/gihong/2023_IEVE/vuasrl_ws/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_880d8.dir/src.c.o
+/usr/bin/cc   -DCMAKE_HAVE_LIBC_PTHREAD   -o CMakeFiles/cmTC_880d8.dir/src.c.o   -c /home/gihong/2023_IEVE/vuasrl_ws/build/CMakeFiles/CMakeTmp/src.c
+Linking C executable cmTC_880d8
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_880d8.dir/link.txt --verbose=1
+/usr/bin/cc  -DCMAKE_HAVE_LIBC_PTHREAD    -rdynamic CMakeFiles/cmTC_880d8.dir/src.c.o  -o cmTC_880d8 
+/usr/bin/ld: CMakeFiles/cmTC_880d8.dir/src.c.o: in function `main':
+src.c:(.text+0x46): undefined reference to `pthread_create'
+/usr/bin/ld: src.c:(.text+0x52): undefined reference to `pthread_detach'
+/usr/bin/ld: src.c:(.text+0x63): undefined reference to `pthread_join'
+collect2: error: ld returned 1 exit status
+make[2]: *** [CMakeFiles/cmTC_880d8.dir/build.make:87: cmTC_880d8] Error 1
+make[2]: Leaving directory '/home/gihong/2023_IEVE/vuasrl_ws/build/CMakeFiles/CMakeTmp'
+make[1]: *** [Makefile:121: cmTC_880d8/fast] Error 2
+make[1]: Leaving directory '/home/gihong/2023_IEVE/vuasrl_ws/build/CMakeFiles/CMakeTmp'
+
+
+Source file was:
+#include <pthread.h>
+
+void* test_func(void* data)
+{
+  return data;
+}
+
+int main(void)
+{
+  pthread_t thread;
+  pthread_create(&thread, NULL, test_func, NULL);
+  pthread_detach(thread);
+  pthread_join(thread, NULL);
+  pthread_atfork(NULL, NULL, NULL);
+  pthread_exit(NULL);
+
+  return 0;
+}
+
+Determining if the function pthread_create exists in the pthreads failed with the following output:
+Change Dir: /home/gihong/2023_IEVE/vuasrl_ws/build/CMakeFiles/CMakeTmp
+
+Run Build Command(s):/usr/bin/make cmTC_71abf/fast && make[1]: Entering directory '/home/gihong/2023_IEVE/vuasrl_ws/build/CMakeFiles/CMakeTmp'
+/usr/bin/make -f CMakeFiles/cmTC_71abf.dir/build.make CMakeFiles/cmTC_71abf.dir/build
+make[2]: Entering directory '/home/gihong/2023_IEVE/vuasrl_ws/build/CMakeFiles/CMakeTmp'
+Building C object CMakeFiles/cmTC_71abf.dir/CheckFunctionExists.c.o
+/usr/bin/cc   -DCHECK_FUNCTION_EXISTS=pthread_create   -o CMakeFiles/cmTC_71abf.dir/CheckFunctionExists.c.o   -c /usr/share/cmake-3.16/Modules/CheckFunctionExists.c
+Linking C executable cmTC_71abf
+/usr/bin/cmake -E cmake_link_script CMakeFiles/cmTC_71abf.dir/link.txt --verbose=1
+/usr/bin/cc  -DCHECK_FUNCTION_EXISTS=pthread_create    -rdynamic CMakeFiles/cmTC_71abf.dir/CheckFunctionExists.c.o  -o cmTC_71abf  -lpthreads 
+/usr/bin/ld: cannot find -lpthreads
+collect2: error: ld returned 1 exit status
+make[2]: *** [CMakeFiles/cmTC_71abf.dir/build.make:87: cmTC_71abf] Error 1
+make[2]: Leaving directory '/home/gihong/2023_IEVE/vuasrl_ws/build/CMakeFiles/CMakeTmp'
+make[1]: *** [Makefile:121: cmTC_71abf/fast] Error 2
+make[1]: Leaving directory '/home/gihong/2023_IEVE/vuasrl_ws/build/CMakeFiles/CMakeTmp'
 
 
 

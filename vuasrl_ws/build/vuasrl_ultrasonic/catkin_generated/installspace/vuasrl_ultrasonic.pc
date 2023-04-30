@@ -1,4 +1,4 @@
-prefix=/home/kimjaen/2023_IEVE/vuasrl_ws/install
+prefix=/usr/local
 
 Name: vuasrl_ultrasonic
 Description: Description of vuasrl_ultrasonic

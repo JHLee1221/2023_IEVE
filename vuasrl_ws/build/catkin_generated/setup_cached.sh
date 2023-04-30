@@ -7,5 +7,10 @@
 # new environment variables
 
 # modified environment variables
-export PWD='/home/kimjaen/2023_IEVE/vuasrl_ws/build'
-export ROS_PACKAGE_PATH='/home/gihong/catkin_ws/src:/home/kimjaen/2023_IEVE/vuasrl_ws/src:/opt/ros/noetic/share'
+export CMAKE_PREFIX_PATH="/home/gihong/2023_IEVE/vuasrl_ws/build/devel:$CMAKE_PREFIX_PATH"
+export LD_LIBRARY_PATH="/home/gihong/2023_IEVE/vuasrl_ws/build/devel/lib:$LD_LIBRARY_PATH"
+export PKG_CONFIG_PATH="/home/gihong/2023_IEVE/vuasrl_ws/build/devel/lib/pkgconfig:$PKG_CONFIG_PATH"
+export PWD='/home/gihong/2023_IEVE/vuasrl_ws/build'
+export PYTHONPATH="/home/gihong/2023_IEVE/vuasrl_ws/build/devel/lib/python3/dist-packages:$PYTHONPATH"
+export ROSLISP_PACKAGE_DIRECTORIES="/home/gihong/2023_IEVE/vuasrl_ws/build/devel/share/common-lisp:$ROSLISP_PACKAGE_DIRECTORIES"
+export ROS_PACKAGE_PATH="/home/gihong/2023_IEVE/vuasrl_ws/src:$ROS_PACKAGE_PATH"

@@ -1,6 +1,6 @@
 set(_CATKIN_CURRENT_PACKAGE "vuasrl_car")
 set(vuasrl_car_VERSION "0.0.0")
-set(vuasrl_car_MAINTAINER "kimjaen <kimjaen@todo.todo>")
+set(vuasrl_car_MAINTAINER "gihong <gihong@todo.todo>")
 set(vuasrl_car_PACKAGE_FORMAT "2")
 set(vuasrl_car_BUILD_DEPENDS "cv_bridge" "geometry_msgs" "rospy" "sensor_msgs" "std_msgs")
 set(vuasrl_car_BUILD_EXPORT_DEPENDS "cv_bridge" "geometry_msgs" "rospy" "sensor_msgs" "std_msgs")

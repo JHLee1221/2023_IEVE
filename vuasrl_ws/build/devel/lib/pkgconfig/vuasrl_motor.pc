@@ -1,0 +1,8 @@
+prefix=/home/gihong/2023_IEVE/vuasrl_ws/build/devel
+
+Name: vuasrl_motor
+Description: Description of vuasrl_motor
+Version: 0.0.0
+Cflags: 
+Libs: -L${prefix}/lib 
+Requires: 

@@ -1,0 +1,8 @@
+prefix=/home/gihong/2023_IEVE/vuasrl_ws/build/devel
+
+Name: vuasrl_msgs
+Description: Description of vuasrl_msgs
+Version: 0.0.0
+Cflags: -I/home/gihong/2023_IEVE/vuasrl_ws/build/devel/include
+Libs: -L${prefix}/lib 
+Requires: geometry_msgs sensor_msgs std_msgs message_runtime

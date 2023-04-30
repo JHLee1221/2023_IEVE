@@ -1,8 +1,8 @@
-# Install script for directory: /home/kimjaen/2023_IEVE/vuasrl_ws/src/vuasrl_motor
+# Install script for directory: /home/gihong/2023_IEVE/vuasrl_ws/src/vuasrl_motor
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "/home/kimjaen/2023_IEVE/vuasrl_ws/install")
+  set(CMAKE_INSTALL_PREFIX "/usr/local")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -38,17 +38,17 @@ if(NOT DEFINED CMAKE_CROSSCOMPILING)
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/kimjaen/2023_IEVE/vuasrl_ws/build/vuasrl_motor/catkin_generated/installspace/vuasrl_motor.pc")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib/pkgconfig" TYPE FILE FILES "/home/gihong/2023_IEVE/vuasrl_ws/build/vuasrl_motor/catkin_generated/installspace/vuasrl_motor.pc")
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/vuasrl_motor/cmake" TYPE FILE FILES
-    "/home/kimjaen/2023_IEVE/vuasrl_ws/build/vuasrl_motor/catkin_generated/installspace/vuasrl_motorConfig.cmake"
-    "/home/kimjaen/2023_IEVE/vuasrl_ws/build/vuasrl_motor/catkin_generated/installspace/vuasrl_motorConfig-version.cmake"
+    "/home/gihong/2023_IEVE/vuasrl_ws/build/vuasrl_motor/catkin_generated/installspace/vuasrl_motorConfig.cmake"
+    "/home/gihong/2023_IEVE/vuasrl_ws/build/vuasrl_motor/catkin_generated/installspace/vuasrl_motorConfig-version.cmake"
     )
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/vuasrl_motor" TYPE FILE FILES "/home/kimjaen/2023_IEVE/vuasrl_ws/src/vuasrl_motor/package.xml")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/share/vuasrl_motor" TYPE FILE FILES "/home/gihong/2023_IEVE/vuasrl_ws/src/vuasrl_motor/package.xml")
 endif()
 

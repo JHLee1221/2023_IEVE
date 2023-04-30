@@ -5,7 +5,7 @@ import cv2
 import numpy as np
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge
-from std_msgs.msg import Int32MultiArray
+from std_msgs.msg import Int32
 from vuasrl_msgs.msg import vuasrl_motor
 
 bridge = CvBridge()
@@ -31,21 +31,18 @@ class MovingAverage:    #이동 평균값 계산 함수
         
     # 이동평균값을 구하는 함수
     def get_mavg(self):
-        return float(sum(self.data)) / len(self.data)
+        return int(sum(self.data)) / len(self.data)
 
     # 중앙값을 사용해서 이동평균값을 구하는 함수
     def get_mmed(self):
-        return float(np.median(self.data))
+        return int(np.median(self.data))
 
     # 가중치를 적용하여 이동평균값을 구하는 함수        
     def get_wmavg(self):
         s = 0
         for i, x in enumerate(self.data):
             s += x * self.weights[i]
-        return float(s) / sum(self.weights[:len(self.data)])
-
-avg_count = 5  # 이동평균값을 계산할 데이터 묶음 갯수
-ultra_mvavg = [MovingAverage(avg_count) for i in range(2)]
+        return int(s) / sum(self.weights[:len(self.data)])
 
 class LaneFollower:
 
@@ -53,31 +50,46 @@ class LaneFollower:
                 
         self.motor_pub = rospy.Publisher('vuasrl_motor', vuasrl_motor, queue_size=1)
         self.image_sub = rospy.Subscriber("/camera/color/image_raw", Image, self.callback, queue_size=1)
-        self.ult_sub = rospy.Subscriber("vuasrl_ultrasonic", Int32MultiArray, self.ultra_callback, queue_size=1)
+        self.ult_sub1 = rospy.Subscriber("right_ultrasonic", Int32, self.ultra_right_callback, queue_size=1)
+        self.ult_sub2 = rospy.Subscriber("left_ultrasonic", Int32, self.ultra_left_callback, queue_size=1)
         self.img_bgr = None
-        self.min_distance = float("inf")
-        #=========================================
-        # 첫번째 토픽이 도착할 때까지 기다립니다.
-        rospy.wait_for_message("vuasrl_ultrasonic", Int32MultiArray)
-        print("UltraSonic Ready ----------")
-        #=========================================        
+        self.min_distance = int(9999)    
 
-    def ultra_callback(self, data):
+        avg_count = 5  # 이동평균값을 계산할 데이터 묶음 갯수
+        self.ultra_mvavg = [MovingAverage(avg_count) for i in range(2)]
+
+    def ultra_right_callback(self, data):
         global ultra_msg, ultra_data
-        ultra_data = data.data
 
-        # 이동평균필터를 적용해서 튀는 값을 제거해서 ultra_msg_ft에 담기
+        ultra_data = int(data.data)
+        print(type(ultra_data))
+        # 이동평균필터를 적용해서 튀는 값을 제거해서 ultrnoea_msg_ft에 담기
         for i in range(2):
-            ultra_mvavg[i].add_sample(float(ultra_data[i]))
+            self.ultra_mvavg[i].add_sample(int(data.data))
+
+        ultra_msg = int(self.ultra_mvavg[0].get_mmed())
+
+        print("Minimum right distance:", round(ultra_msg, 1))
+
+        if (round(ultra_msg, 1) <= 20):
+            self.obastacle()
             
-        ultra_list = [int(ultra_mvavg[i].get_mmed()) for i in range(2)]
-        ultra_msg = tuple(ultra_list)
-        
-        print("Minimum distance1:", round(ultra_msg[0], 1))
-        print("Minimum distance2:", round(ultra_msg[1], 1))
-        
-        if ((round(ultra_msg[0], 1) <= 15) and (round(ultra_msg[1], 1)) <= 15):
-            self.obastacle()    
+    def ultra_left_callback(self, data):
+        global ultra_msg, ultra_data
+
+        ultra_data = int(data.data)
+        print(type(ultra_data))
+        # 이동평균필터를 적용해서 튀는 값을 제거해서 ultrnoea_msg_ft에 담기
+        for i in range(2):
+            self.ultra_mvavg[i].add_sample(int(data.data))
+
+        ultra_msg = int(self.ultra_mvavg[0].get_mmed())
+
+        print("Minimum left distance:", round(ultra_msg, 1))
+
+        if (round(ultra_msg, 1) <= 20):
+            self.obastacle()
+
             
     def obastacle(self):
         msg = vuasrl_motor()

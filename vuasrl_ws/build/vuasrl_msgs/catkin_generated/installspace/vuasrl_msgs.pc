@@ -1,8 +1,8 @@
-prefix=/home/kimjaen/2023_IEVE/vuasrl_ws/install
+prefix=/usr/local
 
 Name: vuasrl_msgs
 Description: Description of vuasrl_msgs
 Version: 0.0.0
-Cflags: 
+Cflags: -I${prefix}/include
 Libs: -L${prefix}/lib 
-Requires: 
+Requires: geometry_msgs sensor_msgs std_msgs message_runtime

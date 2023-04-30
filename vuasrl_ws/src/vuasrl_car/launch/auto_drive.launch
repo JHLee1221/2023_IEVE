@@ -2,6 +2,8 @@
   <!-- Lane Follower Node -->
   <node name="auto_driving" pkg="vuasrl_car" type="lane_stop_hardware.py" output="screen">
   </node>
+  <node name='image' pkg="vuasrl_cam" type="img_publisher.py" output="screen" respawn="true"/>
+ <node name='ultrasonic' pkg="vuasrl_ultrasonic" type="vuasrl_ultrasonic.py" output="screen" respawn="true"/>
   
   <!-- Add other nodes as needed -->
   
