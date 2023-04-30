@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/python3
 
 import rospy
 import cv2
@@ -6,7 +6,7 @@ import numpy as np
 from sensor_msgs.msg import Image
 from cv_bridge import CvBridge
 from std_msgs.msg import Int32MultiArray
-from vuasrl_msgs.msg import vuasrl_motor
+from geometry_msgs.msg import Twist
 
 bridge = CvBridge()
 cv_image = np.empty(shape=[0])
@@ -51,8 +51,8 @@ class LaneFollower:
 
     def __init__(self):
                 
-        self.motor_pub = rospy.Publisher('vuasrl_motor', vuasrl_motor, queue_size=1)
-        self.image_sub = rospy.Subscriber("/camera/color/image_raw", Image, self.callback, queue_size=1)
+        self.motor_pub = rospy.Publisher('/cmd_vel', Twist, queue_size=1)
+        self.image_sub = rospy.Subscriber("/camera/color/image_raw", Image, self.frame_callback, queue_size=1)
         self.ult_sub = rospy.Subscriber("vuasrl_ultrasonic", Int32MultiArray, self.ultra_callback, queue_size=1)
         self.img_bgr = None
         self.min_distance = float("inf")
@@ -80,13 +80,13 @@ class LaneFollower:
             self.obastacle()    
             
     def obastacle(self):
-        msg = vuasrl_motor()
-        msg.angle = 0.0
-        msg.speed = 0.0
+        msg = Twist()
+        msg.angular.z = 0.0
+        msg.linear.x = 0.0
         self.motor_pub.publish(msg)
         #print("obstacle_mode") 
             
-    def callback(self, data):
+    def frame_callback(self, data):
         
         global cv_image
         cv_image = bridge.imgmsg_to_cv2(data, 'bgr8')
@@ -168,11 +168,11 @@ class LaneFollower:
 
             # move the robot based on the position of the center of the lane and check for obstacles
             error = ((cx + 210) - image_transformed.shape[1]/2) + 1
-            msg = vuasrl_motor()
+            msg = Twist()
             ##
-            msg.speed = 5
+            msg.linear.x = 50
             
-            msg.angle = -int(error) / 400
+            msg.angular.z = -int(error) / 100
             self.motor_pub.publish(msg)    
         #image_transformed_bgr = cv2.cvtColor(image_transformed, cv2.COLOR_BGR2GRAY)
         # display the image
