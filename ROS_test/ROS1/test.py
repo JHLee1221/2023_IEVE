@@ -1,59 +1,90 @@
-#!/usr/bin/env python3 
-import rclpy
-from rclpy.node import Node
+import rospy
 import cv2
 import numpy as np
-import time
-
-from geometry_msgs.msg import Twist
-from sensor_msgs.msg import Image, LaserScan
+from sensor_msgs.msg import Image
 from cv_bridge import CvBridge
+from std_msgs.msg import Int32MultiArray
+#from vuasrl_msgs.msg import vuasrl_motor
+from geometry_msgs.msg import Twist
+
 bridge = CvBridge()
 cv_image = np.empty(shape=[0])
+ultra_msg = None  # 초음파 데이터를 담을 변수
+ultra_data = None  # 초음파 토픽의 필터링에 사용할 변수
 
-class LaneFollower(Node):
+class MovingAverage:    #이동 평균값 계산 함수
+
+    def __init__(self, n):
+        self.samples = n
+        self.data = []
+        self.weights = list(range(1, n + 1))
+
+    def add_sample(self, new_sample):
+        if len(self.data) < self.samples:
+            self.data.append(new_sample)
+        else:
+            self.data = self.data[1:] + [new_sample]
+            
+    def get_sample_count(self):
+        return len(self.data)
+        
+    # 이동평균값을 구하는 함수
+    def get_mavg(self):
+        return float(sum(self.data)) / len(self.data)
+
+    # 중앙값을 사용해서 이동평균값을 구하는 함수
+    def get_mmed(self):
+        return float(np.median(self.data))
+
+    # 가중치를 적용하여 이동평균값을 구하는 함수        
+    def get_wmavg(self):
+        s = 0
+        for i, x in enumerate(self.data):
+            s += x * self.weights[i]
+        return float(s) / sum(self.weights[:len(self.data)])
+
+avg_count = 5  # 이동평균값을 계산할 데이터 묶음 갯수
+ultra_mvavg = [MovingAverage(avg_count) for i in range(2)]
+
+class LaneFollower:
 
     def __init__(self):
-        super().__init__('lane_follower')
-        self.image_sub = self.create_subscription(Image, "/image_raw", self.callback, 10)
-        self.laser_sub = self.create_subscription(LaserScan, "/scan", self.laser_callback, 10)
-        self.cmd_vel_pub = self.create_publisher(Twist, '/vuasrl_car/cmd_vel', 10)
+                
+        self.motor_pub = rospy.Publisher('/cmd_vel', Twist, queue_size=1)
+        self.image_sub = rospy.Subscriber("/camera/color/image_raw", Image, self.callback, queue_size=1)
+        self.ult_sub = rospy.Subscriber("/vuasrl_ultrasonic", Int32MultiArray, self.ultra_callback, queue_size=1)
         self.img_bgr = None
         self.min_distance = float("inf")
+        #=========================================
+        # 첫번째 토픽이 도착할 때까지 기다립니다.
+        rospy.wait_for_message("vuasrl_ultrasonic", Int32MultiArray)
+        print("UltraSonic Ready ----------")
+        #=========================================        
 
-    def laser_callback(self, msg):
-        angle_increment = msg.angle_increment
-        num_readings = len(msg.ranges)
+    def ultra_callback(self, data):
+        global ultra_msg, ultra_data
+        ultra_data = data.data
 
-         # Define the angle range to focus on the front of the robot
-        front_angle_range = 30  # degrees, change this value as needed
-
-        front_index_range = int(front_angle_range / 2 / (angle_increment * 180 / np.pi))
-
-        front_ranges = msg.ranges[(num_readings // 2) - front_index_range: (num_readings // 2) + front_index_range]
-
-         # Filter out 'inf' values, which may occur if the sensor can't detect an obstacle
-        front_ranges_filtered = [r for r in front_ranges if r != float('inf')]
-
-        if front_ranges_filtered:
-             self.min_distance = min(front_ranges_filtered)
-        else:
-             self.min_distance = float('inf')
-
-        print("Minimum distance:", round(self.min_distance, 1))
-        
-        if round(self.min_distance, 1) == 1.4:
-            self.obastacle()
-            time.sleep(3.5)
-            self.obastacle1()
-            #break
-        
-        if round(self.min_distance, 1) < 1.4:
-            self.obastacle2()
-
-            #break
+        # 이동평균필터를 적용해서 튀는 값을 제거해서 ultra_msg_ft에 담기
+        for i in range(2):
+            ultra_mvavg[i].add_sample(float(ultra_data[i]))
             
+        ultra_list = [int(ultra_mvavg[i].get_mmed()) for i in range(2)]
+        ultra_msg = tuple(ultra_list)
         
+        print("Minimum distance1:", round(ultra_msg[0], 1))
+        print("Minimum distance2:", round(ultra_msg[1], 1))
+        
+        if ((round(ultra_msg[0], 1) <= 15) and (round(ultra_msg[1], 1)) <= 15):
+            self.obastacle()    
+            
+    def obastacle(self):
+        msg = Twist()
+        msg.angular.z = 0.0
+        msg.linear.x = 0.0
+        self.motor_pub.publish(msg)
+        #print("obstacle_mode") 
+            
     def callback(self, data):
         
         global cv_image
@@ -130,51 +161,22 @@ class LaneFollower(Node):
 
             # move the robot based on the position of the center of the lane and check for obstacles
             error = ((cx + 210) - image_transformed.shape[1]/2) + 1
-            error = error * 180/np.pi
-            error = 2 * (90 - np.fmin(error, 180- error))
-            twist = Twist()
+            msg = Twist()
             ##
-            twist.linear.x = 5.0
+            msg.linear.x = 50
             
-            twist.angular.z = -float(error) / 400
-            self.cmd_vel_pub.publish(twist)    
+            msg.angular.z = -int(error) / 100
+            self.motor_pub.publish(msg)    
         #image_transformed_bgr = cv2.cvtColor(image_transformed, cv2.COLOR_BGR2GRAY)
         # display the image
         cv2.imshow("Lane Detection", image_transformed)
         #cv2.imshow("Lane Detection", frame)
         cv2.waitKey(1) 
-    
-    def obastacle(self):
-        msg = Twist()
-        msg.angular.z = 3.0
-        msg.linear.x = 4.0
-        self.cmd_vel_pub.publish(msg)
-        #print("obstacle_mode") 
-    
-    def obastacle1(self):
-        msg = Twist()
-        msg.angular.z = -3.0
-        msg.linear.x = 5.0
-        self.cmd_vel_pub.publish(msg)
-        print("obstacle_mode") 
-        
-    def obastacle2(self):
-        msg = Twist()
-        msg.angular.z = 0.0
-        msg.linear.x = 0.0
-        self.cmd_vel_pub.publish(msg)
-        print("obstacle_mode") 
-          
-def main(args=None):
-    rclpy.init(args=args)
-    lane_follower = LaneFollower()
-    try:
-        rclpy.spin(lane_follower)
-    except KeyboardInterrupt:
-        lane_follower.get_logger().info('Keyboard Interrupt (SIGINT)')
-    finally:
-        lane_follower.destroy_node()
-        rclpy.shutdown()
-        
+
 if __name__ == '__main__':
-  main()
+
+    rospy.init_node('lane_follower', anonymous=True)
+
+    lane_follower = LaneFollower()
+
+    rospy.spin()
